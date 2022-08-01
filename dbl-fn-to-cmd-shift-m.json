@@ -1,62 +1,67 @@
 {
-    "description": "Transform double Fn key to Cmd-Shift-; (or Cmd-Shift-M)",
-    "manipulators": [
+    "title": "Transform double Fn key to Cmd-Shift-; (or Cmd-Shift-M)",
+    "rules": [
         {
-            "type": "basic",
-            "conditions": [
+            "description": "Transform double Fn key to Cmd-Shift-; (or Cmd-Shift-M)",
+            "manipulators": [
                 {
-                    "type": "variable_if",
-                    "name": "fn pressed",
-                    "value": 1
-                }
-            ],
-            "from": {
-                "apple_vendor_top_case_key_code": "keyboard_fn"
-            },
-            "to": [
-                {
-                    "key_code": "semicolon",
-                    "modifiers": [
-                        "command",
-                        "shift"
+                    "type": "basic",
+                    "conditions": [
+                        {
+                            "type": "variable_if",
+                            "name": "fn pressed",
+                            "value": 1
+                        }
+                    ],
+                    "from": {
+                        "apple_vendor_top_case_key_code": "keyboard_fn"
+                    },
+                    "to": [
+                        {
+                            "key_code": "semicolon",
+                            "modifiers": [
+                                "command",
+                                "shift"
+                            ]
+                        }
                     ]
+                },
+                {
+                    "type": "basic",
+                    "from": {
+                        "apple_vendor_top_case_key_code": "keyboard_fn"
+                    },
+                    "to": [
+                              {
+                                  "set_variable": {
+                                      "name": "fn pressed",
+                                      "value": 1
+                                  }
+                              },
+                              {
+                                  "apple_vendor_top_case_key_code": "keyboard_fn"
+                              }
+                    ],
+                    "to_delayed_action": {
+                        "to_if_invoked": [
+                            {
+                                "set_variable": {
+                                    "name": "fn pressed",
+                                    "value": 0
+                                }
+                            }
+                        ],
+                        "to_if_canceled": [
+                            {
+                                "set_variable": {
+                                    "name": "fn pressed",
+                                    "value": 0
+                                }
+                            }
+                        ]
+                    }
                 }
             ]
-        },
-        {
-            "type": "basic",
-            "from": {
-                "apple_vendor_top_case_key_code": "keyboard_fn"
-            },
-            "to": [
-                      {
-                          "set_variable": {
-                              "name": "fn pressed",
-                              "value": 1
-                          }
-                      },
-                      {
-                          "apple_vendor_top_case_key_code": "keyboard_fn"
-                      }
-            ],
-            "to_delayed_action": {
-                "to_if_invoked": [
-                    {
-                        "set_variable": {
-                            "name": "fn pressed",
-                            "value": 0
-                        }
-                    }
-                ],
-                "to_if_canceled": [
-                    {
-                        "set_variable": {
-                            "name": "fn pressed",
-                            "value": 0
-                        }
-                    }
-                ]
-            }
         }
     ]
 }
